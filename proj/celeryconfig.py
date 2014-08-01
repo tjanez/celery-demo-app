@@ -1,0 +1,2 @@
+CELERY_ENABLE_UTC = True
+CELERY_TIMEZONE = "Europe/Ljubljana"
