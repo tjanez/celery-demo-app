@@ -68,6 +68,44 @@ follwing in the Celery worker terminal:
 [2014-08-05 09:55:59,601: INFO/MainProcess] Task proj.tasks.fib[d5b54b67-9e2f-4469-9b77-33efa52d9e62] succeeded in 5.268263242s: 9227465
 ```
 
+Running the priority_test
+-------------------------
+
+*NOTE: Each of the commands below should be run in a new terminal with the
+celery-demo-app's virtual environment activated.*
+
+- Start a Celery worker that will only consume tasks from the high-priory
+  ("hipri") queue by executing:
+
+    ```
+    celery -A proj worker --loglevel=INFO --concurrency=5 -Q hipri -n worker1.%h
+    ```
+
+- Start a Celery worker that will consume tasks from both the high-priority
+  ("hipri") and the default ("default") queue by executing:
+
+    ```
+    celery -A proj worker --loglevel=INFO --concurrency=5 -Q hipri,default -n worker2.%h
+    ```
+
+- Start Flower, a Celery real-time monitoring tool:
+
+    ```
+    flower -A proj --broker_api=http://<username>:<password>@<rabbitmq-server-name>:55672/api/
+    ```
+
+- Run the priority test by executing:
+
+    ```
+    python test/priority_test.py
+    ```
+
+- Monitor the execution by browsing to `http://<host name>:5555/` and watching
+  the worker terminal's output.
+
+- When you are finished testing, press `Ctrl+C` in the terminal running
+  `test/priority_test.py`.
+
 
 License
 -------
