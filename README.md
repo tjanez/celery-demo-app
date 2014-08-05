@@ -75,14 +75,14 @@ Running the priority_test
 celery-demo-app's virtual environment activated.*
 
 - Start a Celery worker that will only consume tasks from the high-priory
-  ("hipri") queue by executing:
+  (`hipri`) queue by executing:
 
     ```
     celery -A proj worker --loglevel=INFO --concurrency=5 -Q hipri -n worker1.%h
     ```
 
 - Start a Celery worker that will consume tasks from both the high-priority
-  ("hipri") and the default ("default") queue by executing:
+  (`hipri`) and the default (`default`) queue by executing:
 
     ```
     celery -A proj worker --loglevel=INFO --concurrency=5 -Q hipri,default -n worker2.%h
@@ -100,11 +100,10 @@ celery-demo-app's virtual environment activated.*
     python test/priority_test.py
     ```
 
-- Monitor the execution by browsing to `http://<host name>:5555/` and watching
-  the worker terminal's output.
+    You can monitor the execution by browsing to `http://<hostname>:5555/`.
+    Alternatively, you can also watch the workers' terminal output.
 
-- When you are finished testing, press `Ctrl+C` in the terminal running
-  `test/priority_test.py`.
+    When you are finished testing, press `Ctrl+C` to terminate the program.
 
 
 License
